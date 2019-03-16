@@ -3,46 +3,46 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
+
+
 //Creates an array and fills it with objects that contain quotes and various properties.
 
 var quotes = [
   {
-  quote: 'I have bought this wonderful machine- a computer. Now I am rather an authority on gods, so I identified the machine- it seems to me to be an Old Testament god with a lot of rules and no mercy.',
-  source: 'Joseph Campbell',
-  citation: 'The Power of Myth',
-  year: 1988,
-  tag: 'computers'
+  quote: 'Computers themselves, and software yet to be developed, will revolutionize the way we learn.',
+  source: 'Steve Jobs',
+  tag: 'Computers'
   },
   {
   quote: 'Never underestimate the bandwidth of a station wagon full of tapes hurtling down the highway.',
   source: 'Andrew S. Tanenbaum',
   citation: 'Computer Networks 3rd Ed.',
   year: 1996,
-  tag: 'computers'
+  tag: 'Computers'
   },
   {
   quote: "I don't even know how to use a parking meter, let alone a phone box.",
   source: 'Diana, Princess of Wales',
   citation: 'The Times',
   year: 1994,
-  tag: "humor"
+  tag: "Humor"
   },
   {
   quote: 'Life’s barely long enough to get good at one thing. So be careful what you get good at.',
   source: 'Rust Cohle',
   citation: 'True Detective',
-  tag: "ability"
+  tag: "Ability"
   },
   {
   quote: 'There is nothing so ridiculous but some philosopher has said it.',
   source: 'Cicero',
-  tag: "philosophy"
+  tag: "Philosophy"
   },
   {
   quote: 'Life is like riding a bicycle. To keep your balance you must keep moving.',
   source: 'Albert Einstein',
   year: 1930,
-  tag: "advice"
+  tag: "Advice"
 }
 ]
 
@@ -60,13 +60,32 @@ var getRandomQuote = function (){
 // Logs the randomly selected quote to the console for debugging.
 console.log(getRandomQuote());
 
+// Generates a random number between 0 and 4, and returns a string with a color
+var getRandomColor = function(){
+  var ranNum = Math.floor(Math.random()*5);
+  if (ranNum === 0){return 'red';}
+    else if (ranNum === 1){return 'blue';}
+    else if (ranNum === 2){return 'green';}
+    else if (ranNum === 3){return 'purple';}
+    else {return 'orange';}
+}
+
+// Changes the background color of the document and the loadQuote button.
+var changeBackgroundColor = function(){
+  var ranColor = getRandomColor();
+  document.body.style.backgroundColor = ranColor;
+  loadQuote.style.backgroundColor = ranColor;
+}
+
 /* Creates a function that writes the various properties of the object selected by the 'getRandomQuote' function
    to the inner HTML of the DIV element with the 'quote-box' id. The function first checks whether the citation and year
-   properties are present within the object before writing these properties. */ 
+   properties are present within the object before writing these properties. Also changes the background color,
+   button color, and adds tags, if present, below the source*/ 
 
 var printQuote = function(){
   nextQuote = getRandomQuote();
   var quoteString = '';
+  
   quoteString += '<p class="quote">' + nextQuote.quote + '</p>';
   quoteString += '<p class="source">' + nextQuote.source;
   if ('citation' in nextQuote){
@@ -75,20 +94,16 @@ var printQuote = function(){
   if ('year' in nextQuote){
     quoteString += '<span class="year">' + nextQuote.year + '</span>';
   }
+  if ('tag' in nextQuote){
+    quoteString += '<p><span class="tag">' + nextQuote.tag + '</span></p>';
+  }
   quoteString += '</p>';
   document.getElementById("quote-box").innerHTML = quoteString;
+  changeBackgroundColor();
 }
 
+//Sets an 8 second interval where the printQuote function is called whether the button is pressed or not.
+setInterval(printQuote, 5000);
 
-
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
-
+//Event listener calls the printQuote function when the button is pressed.
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.

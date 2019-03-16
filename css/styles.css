@@ -104,3 +104,13 @@ body {
     font-size: 1.25rem;
   }
 }
+
+.tag {
+  border: solid;
+  border-radius: 4px;
+  padding: 6px;
+  margin-right: 4.5em;
+  float: right;
+}
+
+
