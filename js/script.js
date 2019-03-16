@@ -102,7 +102,7 @@ var printQuote = function(){
   changeBackgroundColor();
 }
 
-//Sets an 8 second interval where the printQuote function is called whether the button is pressed or not.
+//Sets an 5 second interval where the printQuote function is called whether the button is pressed or not.
 setInterval(printQuote, 5000);
 
 //Event listener calls the printQuote function when the button is pressed.
